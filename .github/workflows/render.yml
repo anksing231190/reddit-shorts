@@ -9,9 +9,29 @@ permissions:
   issues: write
 concurrency: autopilot-state
 jobs:
-  render:
+  plan:                    # which scripts still need a video
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    outputs:
+      files: ${{ steps.plan.outputs.files }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q requests
+      - id: plan
+        run: python3 -m autopilot.render_scripts plan
+
+  render:                  # one machine per video, all in parallel
+    needs: plan
+    if: needs.plan.outputs.files != '[]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        file: ${{ fromJson(needs.plan.outputs.files) }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -27,20 +47,47 @@ jobs:
         with:
           path: models
           key: kokoro-v1.0
+      - name: Render ${{ matrix.file }}
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: python -m autopilot.render_scripts one "${{ matrix.file }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: video-${{ strategy.job-index }}
+          path: out/
+          retention-days: 3
+          if-no-files-found: ignore
+          compression-level: 0
+
+  publish:                 # collect the videos, write UPLOAD.md, upload to YouTube, commit
+    needs: [plan, render]
+    if: always() && needs.plan.outputs.files != '[]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q requests
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: video-*
+          path: out/
+          merge-multiple: true
       - name: Labels
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh label create daily-batch --color FF4500 --force
-      - name: Render pushed scripts
+      - name: Publish
         env:
           GITHUB_TOKEN: ${{ github.token }}
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
           PYTHONUNBUFFERED: "1"
-        run: python -m autopilot.render_scripts
+        run: python -m autopilot.render_scripts publish
       - name: Save videos
-        if: always()
         run: |
           git config user.name "shorts-autopilot"
           git config user.email "shorts-autopilot@users.noreply.github.com"

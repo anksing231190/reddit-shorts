@@ -78,19 +78,24 @@ class Level:
         self.jumps: list[float] = []
         self.end = 20.0
         self.free = 1
+        self.lane_end = [0.0, 0.0, 0.0]   # where the last train in each lane ends
 
     def extend(self, upto):
         r = self.rng
         while self.end < upto:
             z0 = self.end
-            free = self.free if r.random() < 0.45 else r.choice([l for l in range(3) if abs(l - self.free) <= 1] or [1])
+            # only switch into a neighbouring lane that is completely clear well before the runner moves over
+            options = [l for l in range(3) if abs(l - self.free) == 1 and self.lane_end[l] < z0 - 12.0]
+            free = r.choice(options) if options and r.random() < 0.55 else self.free
             if free != self.free:
                 self.plan.append((z0 - 9.0, free))   # switch lanes a little before the obstacles arrive
                 self.free = free
             blocked = [l for l in range(3) if l != free]
             for l in blocked:
                 if r.random() < 0.75:
-                    self.objs.append(Obj(z0 + r.uniform(0, 3), l, "train", r.uniform(7, 14), r.randrange(4)))
+                    o = Obj(z0 + r.uniform(0, 3), l, "train", r.uniform(7, 14), r.randrange(4))
+                    self.objs.append(o)
+                    self.lane_end[l] = max(self.lane_end[l], o.z + o.length)
             if r.random() < 0.35:   # a barrier in the free lane -> the runner jumps it
                 zb = z0 + r.uniform(5, 9)
                 self.objs.append(Obj(zb, free, "barrier"))
@@ -486,14 +491,16 @@ def vignette(cr):
     cr.fill()
 
 
-def render(out: str, seconds: float, seed: int = 1, theme: str | None = None, fps: int = 60, crf: int = 18,
-           preset: str = "veryfast"):
+def render(out: str | None, seconds: float, seed: int = 1, theme: str | None = None, fps: int = 60, crf: int = 18,
+           preset: str = "veryfast", sink=None):
+    """Encode to `out`, or with `sink` (a binary file object) write raw BGRA frames there instead - make_aita pipes
+    them straight into the final encode so the gameplay is only compressed once."""
     rng = random.Random(seed)
     th = THEMES[theme or rng.choice(list(THEMES))]
     level, skyline, sides = Level(seed), Skyline(rng, th), Sides(rng, th)
     surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, W, H)
     cr = cairo.Context(surf)
-    ff = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "bgra", "-s", f"{W}x{H}",
+    ff = None if sink is not None else subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "bgra", "-s", f"{W}x{H}",
                            "-r", str(fps), "-i", "-", "-c:v", "libx264", "-preset", preset, "-crf", str(crf),
                            "-pix_fmt", "yuv420p", "-movflags", "+faststart", out], stdin=subprocess.PIPE)
     dist, coins, score, pops = 0.0, 0, 0, []
@@ -548,7 +555,9 @@ def render(out: str, seconds: float, seed: int = 1, theme: str | None = None, fp
         vignette(cr)
         hud(cr, th, score, coins, pops)
         surf.flush()
-        ff.stdin.write(bytes(surf.get_data()))
+        (sink if sink is not None else ff.stdin).write(bytes(surf.get_data()))
+    if sink is not None:
+        return out
     ff.stdin.close()
     if ff.wait():
         raise RuntimeError("runner encode failed")

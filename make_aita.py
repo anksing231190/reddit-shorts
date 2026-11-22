@@ -12,9 +12,12 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import random
 import re
+import subprocess
 import tempfile
+import threading
 from pathlib import Path
 
 from rshorts import render, runner, text, tts
@@ -23,6 +26,54 @@ ROOT = Path(__file__).resolve().parent
 VOICES = {"female": ["ava", "jenny", "emma", "aria"], "male": ["andrew", "brian", "guy", "christopher"]}
 KOKORO = {"female": "af_heart", "male": "am_michael"}
 render.FPS = 60
+FPS = 60
+MAX_BYTES = 95 * 1024 * 1024   # GitHub rejects files over 100 MB
+
+
+def compose_live(seconds, seed, theme, wav, ass, card, card_end, out: Path, maxrate="4000k", crf=21):
+    """Gameplay frames go straight from the renderer into this single encode (named pipe): one compression pass,
+    about a third less time than encoding the gameplay first and the final video again."""
+    work = ass.parent
+    fifo = work / "game.raw"
+    os.mkfifo(fifo)
+    total = seconds
+    fade_out = max(card_end - 0.25, 0.1)
+    fc = (f"[0:v]format=yuv420p,eq=saturation=1.05[bg];"
+          f"[2:v]format=rgba,fade=t=in:st=0:d=0.2:alpha=1,fade=t=out:st={fade_out:.2f}:d=0.25:alpha=1[card];"
+          f"[bg][card]overlay=(W-w)/2:(H-h)/2-60:enable='lte(t,{card_end:.2f})':shortest=0[v1];"
+          f"[v1]ass={ass.name}:fontsdir={render.FONTS.as_posix()}[v];[1:a]apad[a]")
+    cmd = ["ffmpeg", "-y", "-loglevel", "error",
+           "-f", "rawvideo", "-pix_fmt", "bgra", "-s", f"{runner.W}x{runner.H}", "-r", str(FPS), "-i", fifo.name,
+           "-i", str(wav), "-loop", "1", "-framerate", str(FPS), "-i", str(card),
+           "-filter_complex", fc, "-map", "[v]", "-map", "[a]", "-t", f"{total:.2f}",
+           "-c:v", "libx264", "-preset", "veryfast", "-tune", "animation", "-crf", str(crf),
+           "-maxrate", maxrate, "-bufsize", str(int(maxrate[:-1]) * 2) + "k", "-pix_fmt", "yuv420p", "-r", str(FPS),
+           "-c:a", "aac", "-b:a", "160k", "-ar", "48000", "-movflags", "+faststart", str(out.resolve())]
+    ff = subprocess.Popen(cmd, cwd=work)
+    err = []
+
+    def feed():
+        try:
+            with open(fifo, "wb") as sink:
+                runner.render(None, total + 0.2, seed=seed, theme=theme, fps=FPS, sink=sink)
+        except BrokenPipeError:
+            pass   # ffmpeg stopped reading at -t
+        except Exception as e:
+            err.append(e)
+
+    th = threading.Thread(target=feed)
+    th.start()
+    th.join()
+    if ff.wait() or err:
+        raise RuntimeError(f"encode failed {err[:1]}")
+    if out.stat().st_size > MAX_BYTES:   # safety net: re-encode at a bitrate that fits
+        kbps = int(MAX_BYTES * 8 / 1024 / total) - 200
+        tmp = out.with_suffix(".tmp.mp4")
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(out), "-c:v", "libx264", "-preset", "veryfast",
+                        "-b:v", f"{kbps}k", "-maxrate", f"{kbps}k", "-bufsize", f"{kbps * 2}k", "-c:a", "copy",
+                        "-movflags", "+faststart", str(tmp)], check=True)
+        tmp.replace(out)
+    return out
 
 
 def slug(s: str, n=50) -> str:
@@ -59,12 +110,8 @@ def make(story: dict, out_dir: Path, *, engine="edge", speed=1.12, seed=None, th
         card = render.title_card(story["post_title"], "AITA", story.get("username", "throwaway_account"), 0, 0,
                                  td / "card.png", footer="Original story  ·  What's your verdict?")
         ass = render.captions_ass(speech.words, td / "captions.ass", start_after=body_start, y=700)
-        bg = td / "gameplay.mp4"
-        print(f"  🎮 gameplay {speech.duration + 1.5:.0f}s (seed {seed}) ...", flush=True)
-        runner.render(str(bg), speech.duration + 1.5, seed=seed, theme=theme, fps=60, crf=16, preset="veryfast")
-        print(f"  🎞  compose {speech.duration:.1f}s  voice={voice}", flush=True)
-        render.compose(narration_wav=wav, duration=speech.duration, ass=ass, card_png=card, card_end=card_end,
-                       out=out, background=bg, music=None, crf=19, preset="fast")
+        print(f"  🎮 gameplay + encode {speech.duration:.0f}s (seed {seed}, voice {voice}) ...", flush=True)
+        compose_live(speech.duration + 0.8, seed, theme, wav, ass, card, card_end, out)
     return out
 
 
