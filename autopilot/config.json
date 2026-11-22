@@ -13,7 +13,7 @@
     "storytime",
     "shorts"
   ],
-  "upload_to_youtube": false,
+  "upload_to_youtube": true,
   "_upload_help": "Set upload_to_youtube to true once the YT_* secrets are added. Each Short is uploaded private and scheduled to go public at the next free slot below (India time), one per slot.",
   "publish_slots_ist": [
     "06:30",

@@ -62,7 +62,8 @@ jobs:
 
   publish:                 # collect the videos, write UPLOAD.md, upload to YouTube, commit
     needs: [plan, render]
-    if: always() && needs.plan.outputs.files != '[]'
+    # also runs by hand (Run workflow) with nothing to render: uploads already-rendered days that aren't on YouTube yet
+    if: always() && (needs.plan.outputs.files != '[]' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -71,6 +72,7 @@ jobs:
           python-version: "3.12"
       - run: pip install -q requests
       - uses: actions/download-artifact@v4
+        continue-on-error: true      # nothing to download on an upload-only run
         with:
           pattern: video-*
           path: out/
