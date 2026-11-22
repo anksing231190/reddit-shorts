@@ -1,0 +1,84 @@
+{
+ "post_title": "AITA for refusing to change my baby's name because my sister-in-law \"reserved\" it in a group chat in 2019?",
+ "username": "name_was_never_taken",
+ "narrator": {
+  "gender": "female",
+  "age": 29
+ },
+ "body": "I (29F) had my daughter three weeks ago. We named her Juniper. My husband (31M) and I picked it together, and we told nobody until she was born. The day we announced it, my sister-in-law (34F) called him crying. She said Juniper was her name. She had \"called it\" in the family group chat in 2019, when she wasn't pregnant, wasn't dating anyone, and still isn't. She actually scrolled back and sent us the screenshot. It says, \"if I ever have a girl her name is Juniper, nobody steal it.\" Four people reacted with a heart. My husband told her we weren't changing it. She said we could at least use it as a middle name so hers could have it as a first name later. Then my mother-in-law got involved and suggested a compromise. We call our daughter June, and save Juniper for the future baby. The future baby who does not exist. Now half the family thinks we stole a name, and my sister-in-law has changed her group chat nickname to Juniper's real aunt. My husband says to ignore it. But the baby shower is next week, and she's hosting it.",
+ "premise": "Sister-in-law claims she 'reserved' the baby's name in a 2019 group chat and wants it back for a hypothetical future baby",
+ "closing": "So, am I the a-hole? Tell me in the comments.",
+ "youtube": {
+  "title": "She Reserved My Baby's Name in 2019",
+  "description": "My sister-in-law says she reserved my daughter's name in a 2019 group chat. She isn't even pregnant. An original AITA story about family and baby names.\n\nWhat's your verdict: NTA or YTA? Comment below.\n\nOriginal fiction written for this channel in the style of AITA posts. Gameplay footage is from an original runner game made for this channel.\n\n#aita #redditstories #storytime #shorts",
+  "tags": [
+   "aita baby name",
+   "sister in law",
+   "baby name drama",
+   "family drama",
+   "in laws",
+   "aita",
+   "reddit stories",
+   "am i the a-hole",
+   "storytime",
+   "shorts"
+  ]
+ },
+ "review": {
+  "words": 193,
+  "title_panel": [
+   {
+    "title": "She Reserved My Baby's Name in 2019",
+    "chars": 35,
+    "score": 94,
+    "issues": [
+     [
+      "duplicate",
+      "thumbnail repeats the title on name - the thumbnail should say what the title does not"
+     ]
+    ],
+    "good": [
+     "35 characters, inside the 60-character desktop cut",
+     "carries a concrete figure (2019)"
+    ],
+    "writer_rank": 0
+   },
+   {
+    "title": "We Named Our Daughter and Family Lost It",
+    "chars": 40,
+    "score": 94,
+    "issues": [
+     [
+      "no-number",
+      "no number, date or name - the most reliable single fix"
+     ]
+    ],
+    "good": [
+     "40 characters, inside the 60-character desktop cut",
+     "thumbnail and title carry different words"
+    ],
+    "writer_rank": 4
+   },
+   {
+    "title": "She Changed Her Nickname to Juniper's Real Aunt",
+    "chars": 47,
+    "score": 80,
+    "issues": [
+     [
+      "mobile",
+      "a mobile feed shows about \"She Changed Her Nickname to Juniper's...\" - check the subject survives"
+     ],
+     [
+      "no-number",
+      "no number, date or name - the most reliable single fix"
+     ]
+    ],
+    "good": [
+     "47 characters, inside the 60-character desktop cut",
+     "thumbnail and title carry different words"
+    ],
+    "writer_rank": 8
+   }
+  ]
+ }
+}
