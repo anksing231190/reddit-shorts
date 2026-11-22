@@ -1,0 +1,31 @@
+name: Branding (photoreal character)
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["branding/photoreal.py"]
+permissions:
+  contents: write
+jobs:
+  branding:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q requests pillow "rembg[cpu]"
+      - run: python branding/photoreal.py
+      - name: Banner + profile for each candidate
+        run: |
+          for c in branding/v3/cutout_*.png; do
+            n=$(basename "$c" .png | sed 's/cutout_//')
+            python branding/make_branding_v3.py "AITA Daily Shorts" --art "$c" --suffix "v3_$n"
+          done
+      - run: |
+          git config user.name "shorts-autopilot"
+          git config user.email "shorts-autopilot@users.noreply.github.com"
+          git add branding
+          git diff --cached --quiet || git commit -q -m "Branding v3 candidates"
+          for i in 1 2 3; do git pull -q --rebase --autostash && git push -q && break; sleep 5; done
