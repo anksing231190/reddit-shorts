@@ -38,7 +38,15 @@ def _h(extra=None):
 
 def _check(r):
     if r.status_code >= 400:
-        raise RuntimeError(f"YouTube API {r.status_code}: {r.text[:500]}")
+        try:
+            e = r.json()["error"]
+            why = "; ".join(f"{x.get('reason')}: {x.get('message')}" for x in e.get("errors", [])) or e.get("message")
+        except Exception:
+            why = " ".join(r.text.split())[:300]
+        hint = {"youtubeSignupRequired": " - this Google login has no YouTube channel: re-authorize and pick the "
+                "channel (brand account) on Google's account chooser"}.get((e.get("errors") or [{}])[0].get("reason", "")
+                                                                         if "e" in locals() else "", "")
+        raise RuntimeError(f"YouTube API {r.status_code}: {why}{hint}")
     return r
 
 
