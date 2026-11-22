@@ -1,0 +1,78 @@
+{
+ "post_title": "AITA for bringing a printed bank receipt to Thanksgiving after my mom told everyone I never helped with her new roof?",
+ "username": "receipts_at_the_table",
+ "narrator": {
+  "gender": "female",
+  "age": 33
+ },
+ "body": "Last spring my mom's roof started leaking, and she couldn't afford to fix it. My older brother (36M) was between jobs, so I (33F) paid four thousand dollars of the six thousand bill. I didn't make a big deal of it. I just transferred the money and asked her not to tell anyone, because my brother is sensitive about money. At Thanksgiving, my aunt asked about the new roof. My mom put her hand on my brother's shoulder and said, my son took care of it. Everyone clapped. Then she looked at me and said, some of us are too busy for family. I'd been told I was too busy for family all year, because I work weekends. I had the bank receipt saved on my phone, but I'll be honest, I'd also printed it out, because I had a feeling. I put it on the table next to the gravy and said, I think there's been a mix up. Nobody clapped this time. My brother looked at the paper, then at my mom, and said quietly, I gave you two hundred dollars. My mom left the table. My aunt says I humiliated my mother on a holiday. My brother texted me later. He just said, thank you, I didn't know she was telling people that.",
+ "premise": "Mom credits the brother for a new roof the narrator mostly paid for; narrator brings the printed bank receipt to Thanksgiving",
+ "closing": "So, am I the a-hole? Tell me in the comments.",
+ "youtube": {
+  "title": "My Brother Paid $200, I Paid $4,000",
+  "description": "I paid most of my mom's new roof and asked her to keep it quiet. At Thanksgiving she gave my brother the credit. An original AITA story about family and money.\n\nWhat's your verdict: NTA or YTA? Comment below.\n\nOriginal fiction written for this channel in the style of AITA posts. Gameplay footage is from an original runner game made for this channel.\n\n#aita #redditstories #storytime #shorts",
+  "tags": [
+   "aita thanksgiving",
+   "family money",
+   "mom",
+   "receipts",
+   "family drama",
+   "aita",
+   "reddit stories",
+   "am i the a-hole",
+   "storytime",
+   "shorts"
+  ]
+ },
+ "review": {
+  "words": 216,
+  "title_panel": [
+   {
+    "title": "My Brother Paid $200, I Paid $4,000",
+    "chars": 35,
+    "score": 100,
+    "issues": [],
+    "good": [
+     "35 characters, inside the 60-character desktop cut",
+     "carries a concrete figure (200,, 4,000)",
+     "thumbnail and title carry different words"
+    ],
+    "writer_rank": 7
+   },
+   {
+    "title": "The $4,000 Secret I Kept for My Mom",
+    "chars": 35,
+    "score": 98,
+    "issues": [
+     [
+      "vague",
+      "secret - swap for a number, a name or a date"
+     ]
+    ],
+    "good": [
+     "35 characters, inside the 60-character desktop cut",
+     "carries a concrete figure (4,000)",
+     "thumbnail and title carry different words"
+    ],
+    "writer_rank": 4
+   },
+   {
+    "title": "Was Bringing the Receipt Too Far?",
+    "chars": 33,
+    "score": 98,
+    "issues": [
+     [
+      "no-number",
+      "no number, date or name - the most reliable single fix"
+     ]
+    ],
+    "good": [
+     "33 characters, inside the 60-character desktop cut",
+     "open question in the title",
+     "thumbnail and title carry different words"
+    ],
+    "writer_rank": 9
+   }
+  ]
+ }
+}

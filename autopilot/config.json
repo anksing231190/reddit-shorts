@@ -1,0 +1,10 @@
+{
+  "_help": "AITA Shorts settings. The daily Claude session writes scripts/<date>/NN.json; GitHub Actions renders them.",
+  "daily_count": 5,
+  "voice_engine": "edge",
+  "speed": 1.12,
+  "body_words_min": 160,
+  "body_words_max": 230,
+  "render_workers": 3,
+  "default_tags": ["aita", "reddit stories", "am i the a-hole", "storytime", "shorts"]
+}

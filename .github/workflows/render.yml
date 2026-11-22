@@ -1,0 +1,46 @@
+name: Render AITA Shorts
+on:
+  push:                    # the daily Claude session pushes scripts/<date>/NN.json -> render them
+    branches: [main]
+    paths: ["scripts/**"]
+  workflow_dispatch:       # re-run by hand: renders any scripts/<date>/ without daily/<date>/UPLOAD.md
+permissions:
+  contents: write
+  issues: write
+concurrency: autopilot-state
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: System packages
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg libcairo2 > /dev/null
+      - name: Python packages
+        run: pip install -q -r requirements.txt
+      - name: Offline voice model cache (fallback only)
+        uses: actions/cache@v4
+        with:
+          path: models
+          key: kokoro-v1.0
+      - name: Labels
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh label create daily-batch --color FF4500 --force
+      - name: Render pushed scripts
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PYTHONUNBUFFERED: "1"
+        run: python -m autopilot.render_scripts
+      - name: Save videos
+        if: always()
+        run: |
+          git config user.name "shorts-autopilot"
+          git config user.email "shorts-autopilot@users.noreply.github.com"
+          git add daily state
+          git diff --cached --quiet || git commit -q -m "AITA Shorts for $(date -u +%F)"
+          ok=; for i in 1 2 3; do git pull -q --rebase --autostash && git push -q && ok=1 && break; sleep 5; done; [ -n "$ok" ] || { echo "::error::could not push results"; exit 1; }
