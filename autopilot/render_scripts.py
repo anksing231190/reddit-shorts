@@ -69,6 +69,15 @@ def render_day(d: Path):
             + "\n".join(f"| {nn} | {st['youtube']['title']} | {st['post_title']} |" for nn, _, st in done)
             + (("\n\n**Failed:**\n" + "\n".join(f"- {nn}: {e}" for nn, e in failed)) if failed else "")
             + f"\n\nVideos and a copy-paste **UPLOAD.md** are in [`daily/{day}/`]({link}).")
+    from . import upload
+    try:
+        ups = upload.upload_day(out)
+    except Exception as e:  # never lose the rendered day because of an upload problem
+        ups = [f"✗ upload failed: {str(e)[:300]}"]
+    if ups:
+        body += "\n\n**YouTube:**\n" + "\n".join(f"- {m}" for m in ups)
+    elif upload.ready(cfg):
+        body += f"\n\nNot uploaded to YouTube: {upload.ready(cfg)}."
     common.create_issue(f"AITA Shorts for {day}", body, ["daily-batch"])
     print(body)
 
@@ -80,6 +89,13 @@ def main():
         print("nothing to render")
     for d in pending:
         render_day(d)
+    # days rendered before YouTube was connected (or whose upload hit the daily quota) get uploaded now
+    from . import upload
+    if not upload.ready(common.cfg()):
+        for day in sorted((ROOT / "daily").glob("*/"))[-3:]:
+            if (day / "UPLOAD.md").exists():
+                for m in upload.upload_day(day):
+                    pass
 
 
 if __name__ == "__main__":

@@ -11,8 +11,9 @@ story card, word-by-word captions and original runner-game gameplay behind it.
    top of `autopilot/finalize.py`. Rules:
    - **Original fiction only**, in the voice of an AITA post. No real people, brands, real places beyond cities,
      or copied Reddit posts. Make up a throwaway `username` (e.g. `seat_14A_throwaway`).
-   - `post_title`: "AITA for …" or "WIBTA if …", specific and a little provocative, under 140 characters. It is read
-     aloud first, so it has to hook on its own.
+   - `post_title_candidates`: 3 different "AITA for …" / "WIBTA if …" lines, best first, specific and a little
+     provocative, under 140 characters. The winner is read aloud first, so it is the hook: `hookscore.py`
+     (yt-script) ranks them. Put the most outrageous concrete detail in it (a number, a relationship, an object).
    - `body`: first person, **160–230 words** (about 60–85 seconds). Write ages/genders the AITA way, "I (27F)",
      "my husband (31M)". Short spoken sentences. Open straight on the conflict, build to one moment where someone
      says or does something outrageous, end on the fallout and why the narrator is unsure. Leave the verdict
@@ -25,8 +26,11 @@ story card, word-by-word captions and original runner-game gameplay behind it.
    - `title_candidates`: 10 YouTube titles, best first, under 60 characters, that do not start with "AITA" and do not
      give away the twist (e.g. "She Wanted My Window Seat for Free"). `thumb_text`: 2–4 words, different from the titles.
    - `premise`: one line describing the story, for the repeat log.
+   - `description_first_lines`: two sentences with the words people search (yt-seo), and `search_queries`: the 3
+     searches this Short should win. finalize warns if their words are missing from the title/description.
+   - Loop (yt-shorts): the closing question should make the first line worth hearing again.
 3. **Finalize each draft.** This runs the youtube-agent-skill `title.py` lint and picks the upload title:
    `python -m autopilot.finalize drafts/NN.json --out scripts/$DATE/NN.json`. Fix and re-run anything it rejects.
-4. **Log them.** Append `{"date": "$DATE", "post_title": ..., "premise": ...}` for each to `state/aita_log.json`.
+4. **Log them.** Append `{"date": "$DATE", "post_title": <the post_title in the finalized script>, "premise": ...}` for each to `state/aita_log.json`.
 5. **Commit and push.** Commit only `scripts/$DATE/` and `state/`, with the message `AITA scripts for $DATE`, then
    `git pull --rebase && git push origin main` (retry up to 4 times). The push starts the render (about 15–20 minutes).

@@ -34,6 +34,9 @@ jobs:
       - name: Render pushed scripts
         env:
           GITHUB_TOKEN: ${{ github.token }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
           PYTHONUNBUFFERED: "1"
         run: python -m autopilot.render_scripts
       - name: Save videos

@@ -42,3 +42,30 @@ python -m rshorts.runner output/gameplay.mp4 --seconds 10 --theme neon
 - Each Short is about 30–60 MB. Expect about 7 GB of video a month; start a fresh repo every month or two, or move
   old videos to Releases.
 - GitHub Actions: about 20 minutes a day, about 600 minutes a month (private repos get 2,000 free).
+
+## Automatic YouTube upload (one-time setup)
+Uploading is off until these are done (`upload_to_youtube` in `autopilot/config.json`).
+1. **Google Cloud project:** at <https://console.cloud.google.com> create a project, then enable **YouTube Data API v3**
+   and **YouTube Analytics API** (APIs & Services → Library).
+2. **OAuth consent screen:** choose External, fill in the app name and your email, add the scopes `youtube.upload`,
+   `youtube.force-ssl` and `yt-analytics.readonly`. Then click **Publish app** ("In production"). In Testing mode the
+   login expires every 7 days and uploads stop.
+3. **Credentials → Create OAuth client ID → Desktop app.** Copy the client ID and client secret.
+4. **On your computer** (once): clone this repo, install Python packages, and sign in with the channel's Google account:
+   `pip install requests` then `python -m autopilot.auth_setup --client-id <ID> --client-secret <SECRET>`.
+   Your browser opens; Google warns the app is unverified (it's your own app): Advanced → Go to app → Allow.
+   The terminal prints a refresh token.
+5. **GitHub secrets** (Settings → Secrets and variables → Actions → New repository secret): `YT_CLIENT_ID`,
+   `YT_CLIENT_SECRET`, `YT_REFRESH_TOKEN`.
+6. Set `"upload_to_youtube": true` in `autopilot/config.json` (or ask the daily Claude session to).
+
+Each Short is uploaded **private with a scheduled publish time** (`publish_slots_ist`: 06:30, 10:30, 17:30, 20:30, 23:30
+India time), so YouTube makes one public per slot. Until then you can edit or delete it in YouTube Studio.
+
+**Important: YouTube API audit.** Google keeps videos uploaded through the API **locked to private** for apps it hasn't
+audited (all new projects). Apply at the "YouTube API Services - Audit and Quota Extension Form" (search that name).
+It's free and usually takes a few weeks. Until it's approved, uploads arrive as private and you make them public in
+Studio yourself.
+
+**Quota:** the free 10,000 units a day allow 6 uploads per Google Cloud project, so 5 Shorts a day fits. Use a separate
+project for each channel.
