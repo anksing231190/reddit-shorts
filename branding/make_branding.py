@@ -73,7 +73,8 @@ def profile(name, out):
     ImageDraw.Draw(glow).ellipse((S * 0.15, S * 0.12, S * 0.85, S * 0.82), fill=(150, 40, 90))
     im = Image.blend(im, glow.filter(ImageFilter.GaussianBlur(S * 0.12)), 0.35)
     d = ImageDraw.Draw(im)
-    bubble(d, (S * 0.14, S * 0.2, S * 0.86, S * 0.68), ORANGE)
+    long_name = d.textlength(re.sub(r"\s+", " ", name).upper(), font=font("Inter-Black.otf", int(S * 0.075))) > S * 0.56
+    bubble(d, (S * 0.14, S * 0.2, S * 0.86, S * 0.68), ORANGE, tail=None if long_name else "left")
     gavel(d, S * 0.5, S * 0.42, S * 0.36, CREAM)
     # label under the bubble, kept inside the circle crop: shrink to fit, or two lines for long names
     label = re.sub(r"\s+", " ", name).upper()
