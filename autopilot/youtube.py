@@ -127,3 +127,11 @@ def video_stats(video_ids: list[str], start: str, end: str) -> dict[str, dict]:
         "dimensions": "video", "filters": "video==" + ",".join(video_ids[:200])}, headers=_h(), timeout=30))
     cols = [c["name"] for c in r.json().get("columnHeaders", [])]
     return {row[0]: dict(zip(cols[1:], row[1:])) for row in r.json().get("rows", [])}
+
+
+def publish_now(video_id: str):
+    """Make an uploaded (private / scheduled) video public immediately."""
+    body = {"id": video_id, "status": {"privacyStatus": "public", "selfDeclaredMadeForKids": False,
+                                       "containsSyntheticMedia": False, "embeddable": True}}
+    _check(requests.put(f"{API}/videos?part=status", headers=_h({"Content-Type": "application/json"}),
+                        data=json.dumps(body), timeout=30))

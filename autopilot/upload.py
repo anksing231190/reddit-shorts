@@ -74,6 +74,25 @@ def upload_day(day_dir: Path) -> list[str]:
     return msgs
 
 
+def publish_now(day: str) -> list[str]:
+    """Make every uploaded Short of one day (daily/<day>/) public right away instead of at its slot."""
+    log = common.load("uploads.json", [])
+    msgs = []
+    for e in log:
+        if f"daily/{day}/" in e["file"] and e.get("status") != "public":
+            try:
+                youtube.publish_now(e["video_id"])
+                e["status"], e["published_now"] = "public", dt.datetime.now(dt.timezone.utc).isoformat()
+                msgs.append(f"✔ public now: {e['title']} - https://youtube.com/shorts/{e['video_id']}")
+            except Exception as ex:
+                msgs.append(f"✗ {e['title']}: {str(ex)[:300]}")
+            print(msgs[-1], flush=True)
+    common.save("uploads.json", log)
+    return msgs
+
+
 if __name__ == "__main__":
-    for m in upload_day(Path(sys.argv[1]).resolve()):
-        pass
+    if sys.argv[1] == "--publish-now":
+        publish_now(sys.argv[2])
+    else:
+        upload_day(Path(sys.argv[1]).resolve())

@@ -1,0 +1,33 @@
+name: Publish a day's Shorts now
+on:
+  workflow_dispatch:
+    inputs:
+      day:
+        description: "Date folder to publish immediately, e.g. 2026-11-22"
+        required: true
+permissions:
+  contents: write
+concurrency: autopilot-state
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q requests
+      - name: Make the day's uploaded Shorts public
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          PYTHONUNBUFFERED: "1"
+        run: python -m autopilot.upload --publish-now "${{ inputs.day }}"
+      - name: Save state
+        run: |
+          git config user.name "shorts-autopilot"
+          git config user.email "shorts-autopilot@users.noreply.github.com"
+          git add state
+          git diff --cached --quiet || git commit -q -m "Published ${{ inputs.day }} now"
+          for i in 1 2 3; do git pull -q --rebase --autostash && git push -q && break; sleep 5; done
