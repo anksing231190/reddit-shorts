@@ -1,10 +1,14 @@
-name: Publish a day's Shorts now
+name: Publish (or hide) a day's Shorts now
 on:
   workflow_dispatch:
     inputs:
       day:
-        description: "Date folder to publish immediately, e.g. 2026-11-22"
+        description: "Date folder, e.g. 2026-11-22"
         required: true
+      privacy:
+        description: "public = publish now, private = hide them"
+        required: false
+        default: public
 permissions:
   contents: write
 concurrency: autopilot-state
@@ -23,7 +27,9 @@ jobs:
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
           PYTHONUNBUFFERED: "1"
-        run: python -m autopilot.upload --publish-now "${{ inputs.day }}"
+        run: |
+          if [ "${{ inputs.privacy }}" = "private" ]; then python -m autopilot.upload --make-private "${{ inputs.day }}";
+          else python -m autopilot.upload --publish-now "${{ inputs.day }}"; fi
       - name: Save state
         run: |
           git config user.name "shorts-autopilot"

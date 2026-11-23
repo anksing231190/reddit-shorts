@@ -51,7 +51,7 @@ def upload_day(day_dir: Path) -> list[str]:
         return []
     log = common.load("uploads.json", [])
     done = {e["file"] for e in log}
-    taken = {e["publish_at"] for e in log}
+    taken = {e["publish_at"] for e in log if e.get("status") not in ("public", "private")}  # published early = slot free
     todo = [p for p in sorted(day_dir.glob("[0-9][0-9]-*.mp4")) if str(p.relative_to(common.ROOT)) not in done]
     msgs = []
     for p, slot in zip(todo, free_slots(cfg, len(todo), taken)):
@@ -75,16 +75,16 @@ def upload_day(day_dir: Path) -> list[str]:
     return msgs
 
 
-def publish_now(day: str) -> list[str]:
-    """Make every uploaded Short of one day (daily/<day>/) public right away instead of at its slot."""
+def publish_now(day: str, privacy: str = "public") -> list[str]:
+    """Set every uploaded Short of one day (daily/<day>/) to public right away, or to private (hide them)."""
     log = common.load("uploads.json", [])
     msgs = []
     for e in log:
-        if f"daily/{day}/" in e["file"] and e.get("status") != "public":
+        if f"daily/{day}/" in e["file"] and e.get("status") != privacy:
             try:
-                youtube.publish_now(e["video_id"])
-                e["status"], e["published_now"] = "public", dt.datetime.now(dt.timezone.utc).isoformat()
-                msgs.append(f"✔ public now: {e['title']} - https://youtube.com/shorts/{e['video_id']}")
+                youtube.publish_now(e["video_id"], privacy)
+                e["status"], e[f"{privacy}_at"] = privacy, dt.datetime.now(dt.timezone.utc).isoformat()
+                msgs.append(f"✔ {privacy} now: {e['title']} - https://youtube.com/shorts/{e['video_id']}")
             except Exception as ex:
                 msgs.append(f"✗ {e['title']}: {str(ex)[:300]}")
             print(msgs[-1], flush=True)
@@ -95,5 +95,7 @@ def publish_now(day: str) -> list[str]:
 if __name__ == "__main__":
     if sys.argv[1] == "--publish-now":
         publish_now(sys.argv[2])
+    elif sys.argv[1] == "--make-private":
+        publish_now(sys.argv[2], "private")
     else:
         upload_day(Path(sys.argv[1]).resolve())
