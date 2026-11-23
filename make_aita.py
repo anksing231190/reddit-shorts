@@ -39,7 +39,7 @@ def compose_live(seconds, seed, theme, wav, ass, card, card_end, out: Path, maxr
     total = seconds
     fade_out = max(card_end - 0.25, 0.1)
     fc = (f"[0:v]format=yuv420p,eq=saturation=1.05[bg];"
-          f"[2:v]format=rgba,fade=t=in:st=0:d=0.2:alpha=1,fade=t=out:st={fade_out:.2f}:d=0.25:alpha=1[card];"
+          f"[2:v]format=rgba,fade=t=out:st={fade_out:.2f}:d=0.25:alpha=1[card];"   # card fully visible on frame 1
           f"[bg][card]overlay=(W-w)/2:(H-h)/2-60:enable='lte(t,{card_end:.2f})':shortest=0[v1];"
           f"[v1]ass={ass.name}:fontsdir={render.FONTS.as_posix()}[v];[1:a]apad[a]")
     cmd = ["ffmpeg", "-y", "-loglevel", "error",
@@ -117,6 +117,9 @@ def make(story: dict, out_dir: Path, *, engine="edge", speed=1.25, seed=None, th
         ass = render.captions_ass(speech.words, td / "captions.ass", start_after=body_start, y=700)
         print(f"  🎮 gameplay + encode {speech.duration:.0f}s (seed {seed}, voice {voice}) ...", flush=True)
         compose_live(speech.duration + 0.8, seed, theme, wav, ass, card, card_end, out)
+        # thumbnail = the opening frame (gameplay + the Reddit-style story card), set as the custom thumbnail on upload
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-ss", f"{min(1.0, card_end / 2):.2f}", "-i", str(out),
+                        "-frames:v", "1", "-q:v", "3", str(out.with_suffix(".jpg"))], check=True)
     return out
 
 

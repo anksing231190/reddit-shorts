@@ -25,6 +25,8 @@ def render_one(path: str, out_dir: str, engine: str, speed: float):
         tmp = make_aita.make(story, Path(out_dir) / f"_{nn}", engine=engine, speed=speed)
         final = Path(out_dir) / f"{nn}-{tmp.name}"
         shutil.move(str(tmp), final)
+        if tmp.with_suffix(".jpg").exists():
+            shutil.move(str(tmp.with_suffix(".jpg")), final.with_suffix(".jpg"))
         shutil.rmtree(Path(out_dir) / f"_{nn}", ignore_errors=True)
         (final.with_suffix(".json")).write_text(json.dumps(story, indent=1, ensure_ascii=False))
         return nn, str(final), None
@@ -101,7 +103,7 @@ def cmd_publish():
             nn = f.stem
             vids = sorted(src.glob(f"{nn}-*.mp4")) if src.exists() else []
             if vids:
-                for p in (vids[0], vids[0].with_suffix(".json")):
+                for p in (vids[0], vids[0].with_suffix(".json"), vids[0].with_suffix(".jpg")):
                     if p.exists():
                         shutil.move(str(p), out / p.name)
                 done.append((nn, str(out / vids[0].name), json.loads(f.read_text(encoding="utf-8"))))

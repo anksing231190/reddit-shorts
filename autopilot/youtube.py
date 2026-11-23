@@ -129,6 +129,13 @@ def video_stats(video_ids: list[str], start: str, end: str) -> dict[str, dict]:
     return {row[0]: dict(zip(cols[1:], row[1:])) for row in r.json().get("rows", [])}
 
 
+def set_thumbnail(video_id: str, jpg: Path):
+    """Custom thumbnail (needs a phone-verified channel; YouTube may still show a frame in the Shorts feed)."""
+    with open(jpg, "rb") as f:
+        _check(requests.post("https://www.googleapis.com/upload/youtube/v3/thumbnails/set", params={"videoId": video_id},
+                             headers=_h({"Content-Type": "image/jpeg"}), data=f.read(), timeout=60))
+
+
 def publish_now(video_id: str, privacy: str = "public"):
     """Set an uploaded video's privacy right now: public (publish immediately) or private (hide it)."""
     body = {"id": video_id, "status": {"privacyStatus": privacy, "selfDeclaredMadeForKids": False,

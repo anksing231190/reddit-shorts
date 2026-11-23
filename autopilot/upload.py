@@ -67,10 +67,19 @@ def upload_day(day_dir: Path) -> list[str]:
             if "quota" in str(e).lower():
                 break
             continue
-        log.append({"file": str(p.relative_to(common.ROOT)), "video_id": vid, "title": y["title"], "publish_at": at})
+        thumb = "no thumbnail file"
+        if p.with_suffix(".jpg").exists():
+            try:
+                youtube.set_thumbnail(vid, p.with_suffix(".jpg"))
+                thumb = "custom thumbnail set"
+            except Exception as e:
+                thumb = ("custom thumbnail not allowed yet - verify the channel with a phone number at "
+                         "youtube.com/verify" if "forbidden" in str(e).lower() or "403" in str(e) else f"thumbnail failed: {str(e)[:120]}")
+        log.append({"file": str(p.relative_to(common.ROOT)), "video_id": vid, "title": y["title"], "publish_at": at,
+                    "thumbnail": thumb})
         common.save("uploads.json", log)
         msgs.append(f"✔ {y['title']} - goes public {slot:%a %d %b %H:%M %Z} "
-                    f"({slot.astimezone(ZoneInfo('Asia/Kolkata')):%a %H:%M} IST) - https://youtube.com/shorts/{vid}")
+                    f"({slot.astimezone(ZoneInfo('Asia/Kolkata')):%a %H:%M} IST) - https://youtube.com/shorts/{vid} - {thumb}")
         print(msgs[-1], flush=True)
     return msgs
 
