@@ -83,5 +83,40 @@
   "publish_at": "2026-11-23T18:30:00.000Z",
   "status": "public",
   "public_at": "2026-11-23T01:03:27.671742+00:00"
+ },
+ {
+  "file": "daily/2026-11-24/01-the-wrong-pdf-from-payroll.mp4",
+  "video_id": "4ca04NZgLlU",
+  "title": "The Wrong PDF From Payroll",
+  "publish_at": "2026-11-24T02:00:00.000Z",
+  "thumbnail": "custom thumbnail set"
+ },
+ {
+  "file": "daily/2026-11-24/02-68-percent-of-the-bill.mp4",
+  "video_id": "mpuBdaUy-uQ",
+  "title": "68 Percent of the Bill?",
+  "publish_at": "2026-11-24T02:45:00.000Z",
+  "thumbnail": "custom thumbnail set"
+ },
+ {
+  "file": "daily/2026-11-24/03-should-i-skip-the-family-cruise.mp4",
+  "video_id": "xJDNX20KQeI",
+  "title": "Should I Skip the Family Cruise?",
+  "publish_at": "2026-11-24T03:30:00.000Z",
+  "thumbnail": "custom thumbnail set"
+ },
+ {
+  "file": "daily/2026-11-24/04-is-keeping-biscuit-stealing.mp4",
+  "video_id": "ZWB9Ac4h5CI",
+  "title": "Is Keeping Biscuit Stealing?",
+  "publish_at": "2026-11-24T04:15:00.000Z",
+  "thumbnail": "custom thumbnail set"
+ },
+ {
+  "file": "daily/2026-11-24/05-was-the-credits-joke-too-far.mp4",
+  "video_id": "wf6hvi4cB1Q",
+  "title": "Was the Credits Joke Too Far?",
+  "publish_at": "2026-11-24T05:00:00.000Z",
+  "thumbnail": "custom thumbnail set"
  }
 ]
