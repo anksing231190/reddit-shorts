@@ -98,6 +98,11 @@ def make(story: dict, out_dir: Path, *, engine="edge", speed=1.25, seed=None, th
             return tts.synthesize(s, "kokoro", KOKORO[gender], speed)
 
     t_speech, b_speech, c_speech = say(title_spoken), say(body), say(closing)
+    est = t_speech.duration + b_speech.duration + c_speech.duration + 2.0
+    if est > 176:   # over 3:00 YouTube treats it as a normal video, not a Short: read a little faster to fit
+        speed = round(speed * est / 172, 3)
+        print(f"  ! {est:.0f}s is too long for a Short - re-reading at {speed}x", flush=True)
+        t_speech, b_speech, c_speech = say(title_spoken), say(body), say(closing)
     voice = f"{voice} (or offline fallback)" if engine == "edge" else voice
     speech, offs = tts.concat([0.15, t_speech, 0.45, b_speech, 0.35, c_speech, 0.3])
     card_end, body_start = offs[2] + 0.2, offs[3]
