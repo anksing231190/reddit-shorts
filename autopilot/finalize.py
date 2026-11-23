@@ -8,7 +8,7 @@ Draft fields:
                     your order), because this line is the hook of the Short.
   username          a made-up throwaway handle (no real people)
   narrator          {"gender": "female" | "male", "age": 27}
-  body              the story, first person, 380-500 words (about 2:10-2:55)
+  body              the story, first person, 420-540 words (about 2:10-2:55 at 1.25x)
   closing           optional last line (default "So, am I the a-hole? Tell me in the comments.")
   premise           one line, logged so later stories never repeat it
   title_candidates  10 YouTube titles, best first (not starting with AITA)

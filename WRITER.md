@@ -14,7 +14,7 @@ story card, word-by-word captions and original runner-game gameplay behind it.
    - `post_title_candidates`: 3 different "AITA for …" / "WIBTA if …" lines, best first, specific and a little
      provocative, under 140 characters. The winner is read aloud first, so it is the hook: `hookscore.py`
      (yt-script) ranks them. Put the most outrageous concrete detail in it (a number, a relationship, an object).
-   - `body`: first person, **380–500 words** (about 2:10–2:55; Shorts can be up to 3 minutes). Write ages/genders the AITA way, "I (27F)",
+   - `body`: first person, **420–540 words** (about 2:10–2:55 at the 1.25× narration speed; Shorts can be up to 3 minutes). Write ages/genders the AITA way, "I (27F)",
      "my husband (31M)". Short spoken sentences. Open straight on the conflict, build to one moment where someone
      says or does something outrageous, end on the fallout and why the narrator is unsure. At this length it needs a middle: a second escalation or a
      reveal about halfway (a text message, a relative taking sides, a receipt) so viewers don't swipe at 1:30. Leave the verdict

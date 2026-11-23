@@ -80,7 +80,7 @@ def slug(s: str, n=50) -> str:
     return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")[:n] or "story"
 
 
-def make(story: dict, out_dir: Path, *, engine="edge", speed=1.12, seed=None, theme=None) -> Path:
+def make(story: dict, out_dir: Path, *, engine="edge", speed=1.25, seed=None, theme=None) -> Path:
     seed = seed if seed is not None else sum(map(ord, story["post_title"]))
     rng = random.Random(seed)
     gender = story.get("narrator", {}).get("gender", "female")
@@ -120,7 +120,7 @@ def main():
     ap.add_argument("story")
     ap.add_argument("--out", default=str(ROOT / "output"))
     ap.add_argument("--engine", default="edge", choices=["edge", "kokoro"])
-    ap.add_argument("--speed", type=float, default=1.12)
+    ap.add_argument("--speed", type=float, default=1.25)
     ap.add_argument("--theme", choices=list(runner.THEMES))
     a = ap.parse_args()
     story = json.loads(Path(a.story).read_text(encoding="utf-8"))
