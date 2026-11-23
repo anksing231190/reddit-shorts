@@ -21,4 +21,21 @@ jobs:
                            headers=youtube._h(), timeout=30).json()
           for c in r.get("items", []):
               print("CHANNEL:", c["snippet"]["title"], "| id", c["id"], "| videos", c["statistics"].get("videoCount"))
+              up = "UU" + c["id"][2:]
+              pl = requests.get(f"{youtube.API}/playlistItems", params={"part": "snippet,status", "playlistId": up,
+                                "maxResults": 20}, headers=youtube._h(), timeout=30).json()
+              for it in pl.get("items", []):
+                  print("VIDEO:", it["snippet"]["resourceId"]["videoId"], "|", it["status"].get("privacyStatus"), "|",
+                        it["snippet"]["title"])
+          import json, os
+          log = json.load(open("state/uploads.json")) if os.path.exists("state/uploads.json") else []
+          ids = [e["video_id"] for e in log]
+          if ids:
+              v = requests.get(f"{youtube.API}/videos", params={"part": "snippet,status", "id": ",".join(ids)},
+                               headers=youtube._h(), timeout=30).json()
+              found = {x["id"]: x for x in v.get("items", [])}
+              for e in log:
+                  x = found.get(e["video_id"])
+                  print("EARLIER UPLOAD:", e["video_id"], "|", e["title"], "|",
+                        (x["snippet"]["channelTitle"] + " / " + x["status"]["privacyStatus"]) if x else "not visible to this login")
           PY
