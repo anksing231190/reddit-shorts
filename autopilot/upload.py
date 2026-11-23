@@ -17,7 +17,6 @@ from zoneinfo import ZoneInfo
 
 from . import common, youtube
 
-IST = ZoneInfo("Asia/Kolkata")
 
 
 def ready(cfg) -> str | None:
@@ -30,12 +29,13 @@ def ready(cfg) -> str | None:
 
 def free_slots(cfg, k: int, taken: set[str]) -> list[dt.datetime]:
     """Next k publish times (from now + 20 min) that no earlier upload has booked."""
-    now = dt.datetime.now(IST) + dt.timedelta(minutes=20)
+    tz = ZoneInfo(cfg.get("publish_timezone", "America/Los_Angeles"))
+    now = dt.datetime.now(tz) + dt.timedelta(minutes=20)
     out, day = [], now.date()
     while len(out) < k:
-        for s in cfg["publish_slots_ist"]:
+        for s in cfg.get("publish_slots") or cfg.get("publish_slots_ist"):
             h, m = map(int, s.split(":"))
-            t = dt.datetime(day.year, day.month, day.day, h, m, tzinfo=IST)
+            t = dt.datetime(day.year, day.month, day.day, h, m, tzinfo=tz)
             iso = t.astimezone(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.000Z")
             if t > now and iso not in taken and len(out) < k:
                 out.append(t)
@@ -69,7 +69,8 @@ def upload_day(day_dir: Path) -> list[str]:
             continue
         log.append({"file": str(p.relative_to(common.ROOT)), "video_id": vid, "title": y["title"], "publish_at": at})
         common.save("uploads.json", log)
-        msgs.append(f"✔ {y['title']} - goes public {slot:%a %d %b %H:%M} IST - https://youtube.com/shorts/{vid}")
+        msgs.append(f"✔ {y['title']} - goes public {slot:%a %d %b %H:%M %Z} "
+                    f"({slot.astimezone(ZoneInfo('Asia/Kolkata')):%a %H:%M} IST) - https://youtube.com/shorts/{vid}")
         print(msgs[-1], flush=True)
     return msgs
 

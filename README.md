@@ -59,8 +59,8 @@ Uploading is off until these are done (`upload_to_youtube` in `autopilot/config.
    `YT_CLIENT_SECRET`, `YT_REFRESH_TOKEN`.
 6. Set `"upload_to_youtube": true` in `autopilot/config.json` (or ask the daily Claude session to).
 
-Each Short is uploaded **private with a scheduled publish time** (`publish_slots_ist`: 06:30, 10:30, 17:30, 20:30, 23:30
-India time), so YouTube makes one public per slot. Until then you can edit or delete it in YouTube Studio.
+Each Short is uploaded **private with a scheduled publish time** (`publish_slots`: 06:30, 10:30, 17:30, 20:30, 23:30
+US Pacific time), so YouTube makes one public per slot. Until then you can edit or delete it in YouTube Studio.
 
 **Important: YouTube API audit.** Google keeps videos uploaded through the API **locked to private** for apps it hasn't
 audited (all new projects). Apply at the "YouTube API Services - Audit and Quota Extension Form" (search that name).

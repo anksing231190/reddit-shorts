@@ -14,13 +14,14 @@
     "shorts"
   ],
   "upload_to_youtube": true,
-  "_upload_help": "Set upload_to_youtube to true once the YT_* secrets are added. Each Short is uploaded private and scheduled to go public at the next free slot below (India time), one per slot.",
-  "publish_slots_ist": [
+  "_upload_help": "Each Short is uploaded private and scheduled to go public at the next free slot below, in publish_timezone (US Pacific; daylight saving is handled automatically), one per slot.",
+  "_length_help": "380-500 body words at speed 1.12 = about 2:10-2:55 per Short (YouTube allows Shorts up to 3:00).",
+  "publish_timezone": "America/Los_Angeles",
+  "publish_slots": [
     "06:30",
     "10:30",
     "17:30",
     "20:30",
     "23:30"
-  ],
-  "_length_help": "380-500 body words at speed 1.12 = about 2:10-2:55 per Short (YouTube allows Shorts up to 3:00)."
+  ]
 }
