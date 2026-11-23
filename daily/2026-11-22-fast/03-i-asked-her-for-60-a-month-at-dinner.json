@@ -1,0 +1,73 @@
+{
+ "post_title": "AITA for telling my roommate's girlfriend she owes us for utilities since she \"doesn't live here\" but showers here every day?",
+ "username": "split_three_ways_now",
+ "narrator": {
+  "gender": "male",
+  "age": 26
+ },
+ "body": "I (26M) live with two roommates, Sam (25M) and Theo (27M). Six months ago, Sam started dating Nadia (24F). Great for him. Then Nadia started staying over. Then she started staying every night. Her toothbrush moved in, then her hair dryer, then a whole shelf in the fridge labeled Nadia, do not touch. Our electric bill went up forty percent. Our water bill almost doubled, because she takes forty minute showers. I know, because I wait for the bathroom every morning. Theo and I brought it up with Sam. He said she doesn't live here, she just visits. So at dinner last week, with everyone there, I said, Nadia, you're welcome here, but since you visit every single day, could you chip in sixty dollars a month for utilities? She put her fork down and said she pays rent at her own place, so why would she pay for ours. Then she went to shower. Forty minutes. Sam is now furious that I embarrassed her, and he's barely talking to me. Theo agrees with me, but only in private. Nadia's fridge shelf now has a new label. It says, for visitors.",
+ "premise": "Roommate's girlfriend practically lives in the apartment and refuses to chip in for doubled utility bills",
+ "closing": "So, am I the a-hole? Tell me in the comments.",
+ "youtube": {
+  "title": "I Asked Her for $60 a Month at Dinner",
+  "description": "My roommate's girlfriend stays every night, showers for forty minutes and says she doesn't live here. An original AITA story about roommates and utility bills.\n\nWhat's your verdict: NTA or YTA? Comment below.\n\nOriginal fiction written for this channel in the style of AITA posts. Gameplay footage is from an original runner game made for this channel.\n\n#aita #redditstories #storytime #shorts",
+  "tags": [
+   "aita roommate",
+   "roommate drama",
+   "utility bills",
+   "girlfriend",
+   "apartment",
+   "aita",
+   "reddit stories",
+   "am i the a-hole",
+   "storytime",
+   "shorts"
+  ]
+ },
+ "review": {
+  "words": 191,
+  "title_panel": [
+   {
+    "title": "I Asked Her for $60 a Month at Dinner",
+    "chars": 37,
+    "score": 100,
+    "issues": [],
+    "good": [
+     "37 characters, inside the 60-character desktop cut",
+     "carries a concrete figure (60)",
+     "thumbnail and title carry different words"
+    ],
+    "writer_rank": 3
+   },
+   {
+    "title": "40-Minute Showers and Zero Dollars",
+    "chars": 34,
+    "score": 100,
+    "issues": [],
+    "good": [
+     "34 characters, inside the 60-character desktop cut",
+     "carries a concrete figure (40)",
+     "thumbnail and title carry different words"
+    ],
+    "writer_rank": 6
+   },
+   {
+    "title": "She Pays Rent Elsewhere So Ours Is Free?",
+    "chars": 40,
+    "score": 98,
+    "issues": [
+     [
+      "no-number",
+      "no number, date or name - the most reliable single fix"
+     ]
+    ],
+    "good": [
+     "40 characters, inside the 60-character desktop cut",
+     "open question in the title",
+     "thumbnail and title carry different words"
+    ],
+    "writer_rank": 5
+   }
+  ]
+ }
+}
