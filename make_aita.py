@@ -113,8 +113,9 @@ def make(story: dict, out_dir: Path, *, engine="edge", speed=1.25, seed=None, th
         wav = td / "narration.wav"
         tts.save_wav(speech, wav)
         card = render.title_card(story["post_title"], "AITA", story.get("username", "throwaway_account"), 0, 0,
-                                 td / "card.png", footer="Original story  ·  What's your verdict?")
-        ass = render.captions_ass(speech.words, td / "captions.ass", start_after=body_start, y=700)
+                                 td / "card.png", footer="Fictional story  ·  What's your verdict?")
+        ass = render.captions_ass(speech.words, td / "captions.ass", start_after=body_start, y=700,
+                                 label="Fictional story · not a real post")
         print(f"  🎮 gameplay + encode {speech.duration:.0f}s (seed {seed}, voice {voice}) ...", flush=True)
         compose_live(speech.duration + 0.8, seed, theme, wav, ass, card, card_end, out)
         # thumbnail = the opening frame (gameplay + the Reddit-style story card), set as the custom thumbnail on upload

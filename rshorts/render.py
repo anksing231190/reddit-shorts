@@ -113,7 +113,7 @@ def group_words(words: list[Word], max_words=3, max_chars=16) -> list[list[Word]
 
 
 def captions_ass(words: list[Word], out: Path, *, start_after: float = 0.0, upper=True,
-                 highlight="&H0000E5FF", size=100, y=1060) -> Path:
+                 highlight="&H0000E5FF", size=100, y=1060, label: str | None = None) -> Path:
     """Big, bold, outlined captions; current spoken word is highlighted and each group pops in."""
     head = f"""[Script Info]
 ScriptType: v4.00+
@@ -125,6 +125,7 @@ ScaledBorderAndShadow: yes
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
 Style: Cap,Inter Black,{size},&H00FFFFFF,&H00FFFFFF,&H00000000,&H96000000,-1,0,0,0,100,100,1,0,1,9,4,5,60,60,0,1
+Style: Lab,Inter Black,40,&H30FFFFFF,&H00FFFFFF,&H00000000,&H96000000,-1,0,0,0,100,100,2,0,1,4,0,8,60,60,0,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -145,6 +146,9 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
             pop = "{\\fscx82\\fscy82\\t(0,90,\\fscx100\\fscy100)}" if wi == 0 else ""
             lines.append(f"Dialogue: 0,{_ass_time(s)},{_ass_time(e)},Cap,,0,0,0,,{{\\pos({W // 2},{y})}}{pop}"
                          + " ".join(parts))
+    if label and words:   # small, always-on disclosure at the top (e.g. "FICTIONAL STORY")
+        lines.append(f"Dialogue: 1,{_ass_time(start_after)},{_ass_time(words[-1].end + 1.0)},Lab,,0,0,0,,"
+                     f"{{\\pos({W // 2},150)}}{label.upper()}")
     out.write_text(head + "\n".join(lines) + "\n", encoding="utf-8")
     return out
 
