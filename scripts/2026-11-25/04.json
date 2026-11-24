@@ -1,0 +1,91 @@
+{
+ "post_title": "AITA for boarding our flight without my friend after he refused to pay back the $640 ticket I fronted until \"after the trip\"?",
+ "username": "gate_b12_regrets",
+ "narrator": {
+  "gender": "male",
+  "age": 25
+ },
+ "body": "I (25M) planned a trip to Lisbon with my two closest friends, Marco (25M) and Theo (26M). We've talked about it since college. In August the fares dropped, and I booked all three tickets on my card so we'd get seats together. Six hundred and forty dollars each. Everyone agreed to pay me back by October.\n\nTheo paid me the next day. Marco said payday. Then he said next payday. In October he bought a new gaming setup and posted about it. When I asked about the money, he sent me a laughing emoji and said, \"Bro, I'll pay you back in vibes.\"\n\nI let it slide for a few weeks. Then I sent him a clear message. I said I needed the six forty by the night before the flight, or I'd move his ticket. Airlines let you change the name on some fares for a fee. I'd checked. He replied, \"lol okay dad.\"\n\nThe night before the flight, nothing. Morning of the flight, nothing. At the airport, Marco shows up, gives me a hug, and says he'll send it \"after the trip, when we see what we spend.\" I asked him to send it right there. He said his account was \"kind of empty until Friday.\"\n\nHere's the part people won't like. My younger brother Sam (22M) had been asking to come for weeks. He'd already offered to pay me the full fare. When Marco didn't pay, I'd quietly told Sam to pack a bag and be ready, just in case. I'd already paid the name-change fee the night before. Marco's ticket was in Sam's name.\n\nSo when we got to the gate, I told Marco the truth. That I'd moved his ticket because he never paid, and Sam was coming instead. Marco stared at me, then at Sam, who was holding a coffee and looking very uncomfortable. Theo said nothing.\n\nMarco called me a snake, loudly, at the gate. He said real friends don't \"ambush\" each other at the airport, and that I should have warned him. I said I did warn him, in writing, and he replied \"lol okay dad.\" He walked out.\n\nThe trip was great, honestly. But Marco has posted about it twice, saying he got \"left at the airport by people he trusted.\" Theo told me privately that I was technically right but I did it in the cruelest possible way, because I planned the swap without telling Marco it was already done. Sam feels guilty and wants to give Marco something from the trip.\n\nMarco still hasn't paid me for anything. Technically he doesn't owe me now, because he didn't fly. But he's acting like I owe him an apology.",
+ "premise": "Narrator fronted friend's $640 flight; friend never paid ('pay you back in vibes'), so narrator secretly changed the ticket name to his brother and told the friend at the gate",
+ "closing": "So, am I the a-hole for swapping the ticket? Tell me in the comments.",
+ "youtube": {
+  "title": "$640 and a Laughing Emoji",
+  "description": "I fronted my friend's $640 plane ticket and he said he'd pay me back in vibes. So I moved his seat to my brother, and told him at the airport gate. An AITA friends trip story about a friend who didn't pay me back, and airport drama.\n\nWhat's your verdict: NTA or YTA? Comment below.\n\nOriginal fiction written for this channel in the style of AITA posts. Gameplay footage is from an original runner game made for this channel.\n\n#aita #redditstories #storytime #shorts",
+  "tags": [
+   "aita friends",
+   "friend money",
+   "travel drama",
+   "pay me back",
+   "aita",
+   "reddit stories",
+   "am i the a-hole",
+   "storytime",
+   "shorts"
+  ]
+ },
+ "review": {
+  "words": 448,
+  "title_panel": [
+   {
+    "title": "$640 and a Laughing Emoji",
+    "chars": 25,
+    "score": 100,
+    "issues": [],
+    "good": [
+     "25 characters, inside the 60-character desktop cut",
+     "carries a concrete figure (640)",
+     "thumbnail and title carry different words"
+    ],
+    "writer_rank": 2
+   },
+   {
+    "title": "He Called Me a Snake at Gate B12",
+    "chars": 32,
+    "score": 100,
+    "issues": [],
+    "good": [
+     "32 characters, inside the 60-character desktop cut",
+     "1 all-caps word for emphasis",
+     "carries a concrete figure (12)",
+     "thumbnail and title carry different words"
+    ],
+    "writer_rank": 7
+   },
+   {
+    "title": "I Swapped His Ticket at the Gate",
+    "chars": 32,
+    "score": 94,
+    "issues": [
+     [
+      "no-number",
+      "no number, date or name - the most reliable single fix"
+     ]
+    ],
+    "good": [
+     "32 characters, inside the 60-character desktop cut",
+     "thumbnail and title carry different words"
+    ],
+    "writer_rank": 1
+   }
+  ],
+  "hook_panel": [
+   {
+    "hook": "AITA for boarding our flight without my friend after he refused to pay back the $640 ticket I fronted until \"after the trip\"?",
+    "verdict": 44
+   },
+   {
+    "hook": "AITA for leaving my best friend at the gate after he told me he'd pay me back for his plane ticket \"in vibes\"?",
+    "verdict": 32
+   },
+   {
+    "hook": "AITA for giving my friend's seat to my brother when he still hadn't paid me for the ticket the day we flew?",
+    "verdict": 36
+   }
+  ],
+  "search_queries": [
+   "friend didn't pay me back",
+   "aita friends trip",
+   "airport drama story"
+  ]
+ }
+}

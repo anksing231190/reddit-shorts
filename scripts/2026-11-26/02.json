@@ -1,0 +1,99 @@
+{
+ "post_title": "AITA for correcting my manager in front of the whole client call when my coworker presented my 2 a.m. slide deck as his own?",
+ "username": "slide_17_was_mine",
+ "narrator": {
+  "gender": "male",
+  "age": 29
+ },
+ "body": "I (29M) work at a mid-size marketing agency. Two weeks ago we had a huge pitch for a new client, and my manager told me and my coworker Brent (32M) to build the deck together. Brent was \"busy with another account,\" so I built it alone. Forty-one slides. I finished at 2 a.m. the night before.\n\nThe next morning Brent presented it. That's normal; he's more senior, he talks to clients. What wasn't normal was the email he sent the client afterward. I was copied. It said, \"Attached is the strategy deck I put together for you.\" I. Not we. Our manager replied-all with \"Great work, Brent!\"\n\nI let it go once. I told myself it was a wording thing.\n\nThen it happened again. Different client, same move. My deck, his intro, \"my analysis shows.\" My manager asked me privately why I'd been \"so quiet lately in meetings.\" I said I'd been busy. Building Brent's presentations, apparently.\n\nSo I did something petty, and I'll own it. In the next deck I made, I added my name and the date in tiny gray text at the bottom of slide seventeen, the pricing slide. The one clients always ask about.\n\nLast Tuesday was the client call. Brent presented. When we got to slide seventeen, the client asked a detailed question about how we'd calculated the pricing tiers. Brent froze. He said, \"Let me circle back on the exact numbers.\"\n\nI unmuted and said, \"I can answer that, I built this model.\" And I did. In detail. The client thanked me by name and asked if I could join the follow-up meeting.\n\nAfter the call, Brent messaged me. \"Not cool, man. You made me look stupid in front of the client.\" Our manager called me in the next day. He said I was right on the content but that I'd \"undermined a colleague in front of a client,\" and that kind of thing \"isn't how we do things here.\" He also asked, almost as an afterthought, whether I'd built the last two decks too. I said yes. He went quiet. Then he asked me to send him the original files with their timestamps, which I did that afternoon.\n\nNow the team is split. Two coworkers have told me they've watched Brent do this to other people for years and they're glad someone finally said something. One said I should've gone to the manager privately first, and that doing it live was about ego, not credit.\n\nBrent has stopped speaking to me except about work. My manager has added me to the follow-up meeting. My name is still on slide seventeen.",
+ "premise": "Coworker kept presenting narrator's slide decks as his own; narrator hid his name on the pricing slide and answered the client's question live when coworker froze",
+ "closing": "So, am I the a-hole for speaking up on the call? Tell me in the comments.",
+ "youtube": {
+  "title": "I Built It at 2 A.M., He Took the Credit",
+  "description": "My coworker kept presenting the slide decks I built at 2 a.m. as his own work. So on a client call, when he froze on the pricing slide, I unmuted and answered. An AITA work story about a coworker who stole my work and took credit.\n\nWhat's your verdict: NTA or YTA? Comment below.\n\nOriginal fiction written for this channel in the style of AITA posts. Gameplay footage is from an original runner game made for this channel.\n\n#aita #redditstories #storytime #shorts",
+  "tags": [
+   "aita work",
+   "coworker credit",
+   "office drama",
+   "workplace",
+   "aita",
+   "reddit stories",
+   "am i the a-hole",
+   "storytime",
+   "shorts"
+  ]
+ },
+ "review": {
+  "words": 437,
+  "title_panel": [
+   {
+    "title": "I Built It at 2 A.M., He Took the Credit",
+    "chars": 40,
+    "score": 98,
+    "issues": [
+     [
+      "duplicate",
+      "thumbnail repeats the title on built - the thumbnail should say what the title does not"
+     ]
+    ],
+    "good": [
+     "40 characters, inside the 60-character desktop cut",
+     "1 all-caps word for emphasis",
+     "carries a concrete figure (2)"
+    ],
+    "writer_rank": 2
+   },
+   {
+    "title": "He Presented My Deck as His Own",
+    "chars": 31,
+    "score": 94,
+    "issues": [
+     [
+      "no-number",
+      "no number, date or name - the most reliable single fix"
+     ]
+    ],
+    "good": [
+     "31 characters, inside the 60-character desktop cut",
+     "thumbnail and title carry different words"
+    ],
+    "writer_rank": 0
+   },
+   {
+    "title": "Slide Seventeen Had My Name on It",
+    "chars": 33,
+    "score": 94,
+    "issues": [
+     [
+      "no-number",
+      "no number, date or name - the most reliable single fix"
+     ]
+    ],
+    "good": [
+     "33 characters, inside the 60-character desktop cut",
+     "thumbnail and title carry different words"
+    ],
+    "writer_rank": 1
+   }
+  ],
+  "hook_panel": [
+   {
+    "hook": "AITA for correcting my manager in front of the whole client call when my coworker presented my 2 a.m. slide deck as his own?",
+    "verdict": 42
+   },
+   {
+    "hook": "AITA for adding a hidden slide with my name to the deck my coworker keeps presenting as his work?",
+    "verdict": 36
+   },
+   {
+    "hook": "AITA for telling the client \"I can answer that, I built this\" after my coworker took credit for my deck?",
+    "verdict": 36
+   }
+  ],
+  "search_queries": [
+   "coworker took credit",
+   "aita work",
+   "coworker stole my work"
+  ]
+ }
+}
