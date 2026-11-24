@@ -22,5 +22,32 @@
     "08:30",
     "09:30",
     "10:30"
-  ]
+  ],
+  "plan": [
+    {
+      "from": "2026-11-24",
+      "slots": [
+        "07:30",
+        "08:30",
+        "09:30",
+        "10:30"
+      ]
+    },
+    {
+      "from": "2026-12-07",
+      "slots": [
+        "07:30",
+        "09:00",
+        "10:30"
+      ]
+    },
+    {
+      "from": "2026-12-21",
+      "slots": [
+        "08:00",
+        "10:00"
+      ]
+    }
+  ],
+  "_plan_help": "Shorts per day and their times by publish date (autopilot/plan.py): 4/day until Dec 6, 3/day Dec 7-20, then 2/day. The nightly writer writes `python -m autopilot.plan` Shorts."
 }

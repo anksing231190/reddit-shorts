@@ -33,7 +33,8 @@ def free_slots(cfg, k: int, taken: set[str]) -> list[dt.datetime]:
     now = dt.datetime.now(tz) + dt.timedelta(minutes=20)
     out, day = [], now.date()
     while len(out) < k:
-        for s in cfg.get("publish_slots") or cfg.get("publish_slots_ist"):
+        from .plan import slots_for
+        for s in slots_for(cfg, day):
             h, m = map(int, s.split(":"))
             t = dt.datetime(day.year, day.month, day.day, h, m, tzinfo=tz)
             iso = t.astimezone(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.000Z")
