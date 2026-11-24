@@ -1,6 +1,6 @@
 {
   "_help": "AITA Shorts settings. The daily Claude session writes scripts/<date>/NN.json; GitHub Actions renders them.",
-  "daily_count": 2,
+  "daily_count": 4,
   "voice_engine": "edge",
   "speed": 1.25,
   "body_words_min": 420,
@@ -18,7 +18,9 @@
   "_length_help": "420-540 body words at speed 1.25 = about 2:10-2:55 per Short (YouTube allows Shorts up to 3:00).",
   "publish_timezone": "Asia/Kolkata",
   "publish_slots": [
-    "08:00",
-    "10:00"
+    "07:30",
+    "08:30",
+    "09:30",
+    "10:30"
   ]
 }

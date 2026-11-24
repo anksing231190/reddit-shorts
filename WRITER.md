@@ -1,13 +1,13 @@
 # Daily writer instructions (Claude session, no API key)
 
-A scheduled Claude session follows this file every day. It writes 2 original AITA-style stories (quality over volume: YouTube's inauthentic-content policy) and pushes them.
+A scheduled Claude session follows this file every day. It writes 4 original AITA-style stories (quality over volume: YouTube's inauthentic-content policy) and pushes them.
 GitHub Actions (`Render AITA Shorts`) renders each one into `daily/<date>/`: a 1080×1920, 60 fps Short with the
 story card, word-by-word captions and original runner-game gameplay behind it.
 
 `DATE=$(TZ=Asia/Kolkata date +%F)`. If `scripts/$DATE/` already exists, stop: today is done.
 
 1. **Avoid repeats.** Read `state/aita_log.json`. Don't reuse any earlier premise, conflict or twist.
-2. **Write 2 drafts** as `drafts/01.json` and `drafts/02.json` (`drafts/` is not committed). Fields are listed at the
+2. **Write 4 drafts** as `drafts/01.json` … `drafts/04.json` (`drafts/` is not committed). Fields are listed at the
    top of `autopilot/finalize.py`. Rules:
    - **Original fiction only**, in the voice of an AITA post. No real people, brands, real places beyond cities,
      or copied Reddit posts. Make up a throwaway `username` (e.g. `seat_14A_throwaway`).
@@ -34,4 +34,4 @@ story card, word-by-word captions and original runner-game gameplay behind it.
    `python -m autopilot.finalize drafts/NN.json --out scripts/$DATE/NN.json`. Fix and re-run anything it rejects.
 4. **Log them.** Append `{"date": "$DATE", "post_title": <the post_title in the finalized script>, "premise": ...}` for each to `state/aita_log.json`.
 5. **Commit and push.** Commit only `scripts/$DATE/` and `state/`, with the message `AITA scripts for $DATE`, then
-   `git pull --rebase && git push origin main` (retry up to 4 times). The push starts the render (about 25–35 minutes; the 2 videos render in parallel).
+   `git pull --rebase && git push origin main` (retry up to 4 times). The push starts the render (about 25–35 minutes; the 4 videos render in parallel).
