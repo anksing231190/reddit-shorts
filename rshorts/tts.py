@@ -136,12 +136,17 @@ def _get_kokoro():
                 import requests
 
                 print(f"  downloading {name} (one time)...")
+                import os
+                part = mdir / f"{name}.{os.getpid()}.part"   # per-process: parallel renders download safely
                 with requests.get(url, stream=True, timeout=60) as r:
                     r.raise_for_status()
-                    with open(mdir / (name + ".part"), "wb") as f:
+                    with open(part, "wb") as f:
                         for b in r.iter_content(1 << 20):
                             f.write(b)
-                (mdir / (name + ".part")).rename(mdir / name)
+                if (mdir / name).exists():               # another process finished first
+                    part.unlink(missing_ok=True)
+                else:
+                    os.replace(part, mdir / name)
         _kokoro = Kokoro(str(mdir / "kokoro-v1.0.onnx"), str(mdir / "voices-v1.0.bin"))
     return _kokoro
 
