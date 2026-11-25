@@ -1,0 +1,94 @@
+{
+ "post_title": "AITA for paying only for my $14 salad when my friends ordered four bottles of wine and wanted to split a $480 bill \"evenly\"?",
+ "username": "just_the_salad_thanks",
+ "narrator": {
+  "gender": "female",
+  "age": 28
+ },
+ "body": "I (28F) am trying to save for a house deposit. My friends know this. I've been honest that I'm cutting back on going out, and that when I do come, I'll keep it cheap.\n\nLast Saturday was my friend Rachel's (29F) birthday dinner. Seven of us, at a nice Italian place she picked. I ordered a fourteen-dollar salad and tap water. I'm not judging anyone else, I just know my budget.\n\nEveryone else went big, which is totally fine. Nobody asked me beforehand how we'd pay, and I didn't ask either. Appetizers for the table, which I didn't touch, three courses each, and four bottles of wine. Then someone ordered a round of espresso martinis. By the end, the bill came to four hundred and eighty dollars before tip.\n\nOur friend Marcus (31M) grabbed the bill and announced, \"Okay, it's about eighty each with tip, let's just split it evenly, it's easier.\" Everyone started taking out cards.\n\nI said, quietly, that I'd just pay for my salad plus tip, so about twenty dollars, and I'd happily throw in a bit extra toward Rachel's share since it was her birthday. So twenty-five, say.\n\nThe table went quiet. Marcus said, \"We always split evenly, that's the rule.\" I said I didn't know we had a rule, and that I'd literally had a salad and water. He said I was \"being weird about money again.\"\n\nRachel didn't say anything. But later that night she texted me that I'd made her birthday \"awkward\" and that I could have just \"eaten the cost this once\" instead of \"doing math at the table.\"\n\nHere's what made it worse. The next day, another friend, Tasha, messaged me privately. She said she'd also ordered cheap on purpose, and she'd wanted to say something but didn't have the guts. She ended up paying eighty dollars for a pasta and one glass of wine. She said she was glad I spoke up.\n\nThen I found out that Marcus had picked three of the four bottles of wine himself, and drank most of them.\n\nNow the group chat is quiet. Marcus posted a meme about \"friends who bring calculators to dinner.\" Two people liked it. Rachel says we're fine, but she didn't invite me to the movie night they planned for this weekend.\n\nMy boyfriend says I did nothing wrong. My mom says I should have just paid the eighty to keep the peace and then stopped going to dinners like that. I keep doing the math, though. Eighty dollars is about a week of my house fund.",
+ "premise": "At a friend's birthday dinner, narrator (saving for a house) had a $14 salad and water while others ordered 4 bottles of wine; she paid her share instead of the $80 even split",
+ "closing": "So, am I the a-hole for not splitting it evenly? Tell me in the comments.",
+ "youtube": {
+  "title": "Tasha Paid $80 for One Glass",
+  "description": "I ordered a $14 salad and water while my friends ordered four bottles of wine, then they wanted to split the $480 bill evenly. An AITA friends story about splitting the bill at dinner. Dinner bill drama at a birthday.\n\nWhat's your verdict: NTA or YTA? Comment below.\n\nOriginal fiction written for this channel in the style of AITA posts. Gameplay footage is from an original runner game made for this channel.\n\n#aita #redditstories #storytime #shorts",
+  "tags": [
+   "aita friends",
+   "split the bill",
+   "dinner drama",
+   "money",
+   "aita",
+   "reddit stories",
+   "am i the a-hole",
+   "storytime",
+   "shorts"
+  ]
+ },
+ "review": {
+  "words": 427,
+  "title_panel": [
+   {
+    "title": "Tasha Paid $80 for One Glass",
+    "chars": 28,
+    "score": 100,
+    "issues": [],
+    "good": [
+     "28 characters, inside the 60-character desktop cut",
+     "carries a concrete figure (80)",
+     "thumbnail and title carry different words"
+    ],
+    "writer_rank": 6
+   },
+   {
+    "title": "We Always Split Evenly, He Said",
+    "chars": 31,
+    "score": 94,
+    "issues": [
+     [
+      "no-number",
+      "no number, date or name - the most reliable single fix"
+     ]
+    ],
+    "good": [
+     "31 characters, inside the 60-character desktop cut",
+     "thumbnail and title carry different words"
+    ],
+    "writer_rank": 1
+   },
+   {
+    "title": "$14 Salad, $480 Bill",
+    "chars": 20,
+    "score": 94,
+    "issues": [
+     [
+      "duplicate",
+      "thumbnail repeats the title on salad - the thumbnail should say what the title does not"
+     ]
+    ],
+    "good": [
+     "20 characters, inside the 60-character desktop cut",
+     "carries a concrete figure (14, 480)"
+    ],
+    "writer_rank": 2
+   }
+  ],
+  "hook_panel": [
+   {
+    "hook": "AITA for paying only for my $14 salad when my friends ordered four bottles of wine and wanted to split a $480 bill \"evenly\"?",
+    "verdict": 44
+   },
+   {
+    "hook": "AITA for refusing to split the dinner bill seven ways after I drank water and my friends drank $260 of wine?",
+    "verdict": 42
+   },
+   {
+    "hook": "AITA for asking for a separate check at my friend's birthday dinner when the group always splits everything evenly?",
+    "verdict": 36
+   }
+  ],
+  "search_queries": [
+   "splitting the bill",
+   "aita friends",
+   "dinner bill drama"
+  ]
+ }
+}
